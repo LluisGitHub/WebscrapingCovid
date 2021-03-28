@@ -4,7 +4,6 @@
 Created on Tue Mar 23 21:51:42 2021
 
 @author: Lluis
-@author: Aleix
 """
 
 
@@ -105,31 +104,22 @@ if __name__ == "__main__":
     log_print(log, soup.prettify())    
     
     # Recerca de taules.
-    log_print(log, "Recerca de tautes")
+    log_print(log, "Recerca de taules")
     for table in soup.find_all('table'):
         log_print(log, table.get_text())
 
-    #for tr in soup.find_all('tr')[2:]:
-    #    tds = tr.find_all('td')
-    #    print(tds[0].get_text())
-    #    print(tds[1].get_text())
-        
     table = soup.find("table", attrs={"class": "table center"})
-    #print(table)
     headings = []
-    #for th in table.find_all("th"):
-    #    for td in th.find_all("td"):
-    #        headings.append(td.text.replace('\n', '').strip())
-    #print(headings)
     log_print(log, "headings")
-    headings = []
     for ths in table.find_all("th"):
         log_print(log, "ths.get_text(): " + ths.text.replace('\n', ' ').strip())
         headings.append(ths.text.replace('\n', ' ').strip())
     
+    # Log Headings
     log_print(log, "headings-summary: ")
     log_print(log, headings)
     
+    # Recerca de les dades de la tala
     table_data = []
     for trs in table.tbody.find_all("tr"):
         t_row = []
@@ -142,6 +132,7 @@ if __name__ == "__main__":
     log_print(log, "table_data: ")
     log_print(log, table_data)
     
+    # Generació del csv de sortida
     log_print(log, "csv_output: ")
     outfile = open("table_data.csv","w",newline='')
     writer = csv.writer(outfile)
