@@ -62,7 +62,7 @@ def do_request(url, headers, timesleep, timeout, retries):
             download = True
             count -= 1
         if count == 0:
-            beark
+            break
     return page
   
 if __name__ == "__main__":
